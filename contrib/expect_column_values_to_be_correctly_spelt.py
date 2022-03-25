@@ -38,23 +38,13 @@ class ColumnValuesCorrectSpelling(ColumnMapMetricProvider): #(ColumnMapMetricPro
     @column_condition_partial(engine=PandasExecutionEngine)
     def _pandas(cls, column, **kwargs):
         
-        # logic implementation:
-        
+        # logic implementation:        
         def check_spelling(text):
             
             text = [text]
             x = len(spell.unknown(text)) == 0
-            
-            #if not x:
-                #raise Exception(f"{len(spell.unknown(text))} errors detected.")
                 
             return x
-        
-            """
-            if len(spell.unknown(text)) > 0: # number of misspelt words
-                return False
-            else:
-                return True"""
         
         return column.apply(check_spelling) # return boolean array
 
